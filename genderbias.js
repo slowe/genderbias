@@ -66,7 +66,7 @@ function getExamples(data){
 		if(m){
 			md = m[1];
 			html = md.replace(/\.md/,".html");
-			loadFILE('examples/'+html,success,{error:function(){ console.log('trying '+alt);loadFILE('examples/'+md,success); }});
+			loadFILE('examples/'+html,success,{error:function(){ loadFILE('examples/'+md,success); }});
 		}
 	}
 }
