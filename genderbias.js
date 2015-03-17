@@ -61,7 +61,7 @@ function getExamples(data,attr){
 	//attr.error = loadedExamples;
 	loadFILE('examples/'+(attr.i-1)+'.md',getExamples,attr);
 }
-getExamples();
+//getExamples();
 
 // Function to load a file (same domain)
 function loadFILE(file,fn,attrs){
