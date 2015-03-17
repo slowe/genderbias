@@ -34,7 +34,7 @@ function example() {
 	textChanged();
 }
 
-function parseMarkdown(data){
+function parsePage(data){
 	if(typeof data==="string") data = data.split(/[\n\r]/);
 	// If it looks like YAML we remove it
 	start = 0;
@@ -51,19 +51,22 @@ function parseMarkdown(data){
 	for(var i = start; i < data.length; i++){
 		out += data[i]+'\n';
 	}
+	// Replace HTML
+	out = out.replace(/\<[^\>]+\>/,'');
 	return out;
 }
 
 function getExamples(data){
 	if(typeof data==="string") data = data.split(/[\n\r]/);
-	var m,alt;
+	var m,md,html;
 	var success = function(data,a){ if(data) examples.push(data); };
 
 	for(var i = 0; i < data.length ; i++){
 		m = data[i].match(/\* \[[^\]]+\]\(([^\)]+)\)/);
 		if(m){
-			alt = m[1].replace(/\.md/,".html");
-			loadFILE('examples/'+m[1],success,{error:function(){ console.log('trying '+alt);loadFILE('examples/'+alt,success); }});
+			md = m[1];
+			html = md.replace(/\.md/,".html");
+			loadFILE('examples/'+html,success,{error:function(){ console.log('trying '+alt);loadFILE('examples/'+md,success); }});
 		}
 	}
 }
@@ -81,6 +84,7 @@ function loadFILE(file,fn,attrs){
 		xhr.addEventListener("abort", error, false);
 	}
 	xhr.onreadystatechange = function(){
+		console.log(xhr.readyState)
 		if(xhr.readyState==4){
 			if(typeof fn==="function"){
 				fn.call((attrs.context ? attrs.context : this),xhr.responseText,attrs);
