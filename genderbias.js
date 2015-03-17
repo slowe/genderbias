@@ -54,14 +54,17 @@ function parseMarkdown(data){
 	return out;
 }
 
-function getExamples(data,attr){
-	if(!attr) var attr = { i: 1 };
-	if(data){ examples.push(data); }
-	attr.i++;
-	//attr.error = loadedExamples;
-	loadFILE('examples/'+(attr.i-1)+'.md',getExamples,attr);
+function getExamples(data){
+	if(typeof data==="string") data = data.split(/[\n\r]/);
+	var m;
+	for(var i = 0; i < data.length ; i++){
+		m = data[i].match(/\* \[[^\]]+\]\(([^\)]+)\)/);
+		if(m){
+			loadFILE('examples/'+m[1],function(data,a){ if(data) examples.push(data); });
+		}
+	}
 }
-//getExamples();
+loadFILE('examples/README.md',getExamples);
 
 // Function to load a file (same domain)
 function loadFILE(file,fn,attrs){
