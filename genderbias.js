@@ -64,7 +64,7 @@ function getExamples(data){
 		}
 	}
 }
-loadFILE('examples/README.md',getExamples);
+//loadFILE('examples/README.md',getExamples);
 
 // Function to load a file (same domain)
 function loadFILE(file,fn,attrs){
