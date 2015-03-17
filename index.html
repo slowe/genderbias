@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<link href='style.css' rel='stylesheet' type="text/css">
+		<title>Gender-bias calculator</title>
+		<script type="text/javascript" language=javascript>
+			var maleWords = ["excellen\\w*", "superb", "outstanding", "unique", "exceptional", "unparalleled", "\\w{2,}est", "best", "most", "wonderful", "terrific\\w*", "fabulous", "magnificent", "remarkable", "extraordinar\\w*", "amazing", "supreme\\w*", "unmatched", "talent\\w*", "intell\\w*", "smart\\w*", "skill\\w*", "ability", "genius", "brilliant\\w*", "bright\\w*", "brain\\w*", "aptitude", "gift\\w*", "capacity", "propensity", "innate", "flair", "knack", "clever\\w*", "expert\\w*", "proficient\\w*", "capable", "adept\\w*", "able", "competent", "natural\\w*", "inherent\\w*", "instinct\\w*", "adroit\\w*", "creative\\w*", "insight\\w*", "analytical", "research\\w*", "data", "study", "studies", "experiment\\w*", "scholarship", "result\\w*", "^test\\w*", "finding\\w*", "publication\\w*", "publish\\w*", "vita\\w*", "method\\w*", "scien\\w*", "grant\\w*", "fund\\w*", "manuscript\\w*", "project\\w*", "journal\\w*", "theor\\w*", "discover\\w*", "contribution\\w*"];
+
+			var femaleWords = ["hardworking", "conscientious", "depend\\w*", "meticulous", "thorough", "diligen\\w*", "dedicate", "careful", "reliab\\w*", "effort\\w*", "assiduous", "trust\\w*", "responsib\\w*", "methodical", "industrious", "busy", "work\\w*", "persist\\w*", "organiz\\w*", "disciplined", "teach", "instruct", "educat\\w*", "train\\w*", "mentor", "supervis\\w*", "adviser", "counselor", "syllabus", "syllabus", "course\\w*", "class", "service", "colleague", "citizen", "communicate\\w*", "lectur\\w*", "student\\w*", "present\\w*", "rapport"];
+
+			function textChanged() {
+				document.getElementById("foundFemaleWords").innerHTML = "";
+				document.getElementById("foundMaleWords").innerHTML = "";
+				
+				var letterText = document.getElementById("recommendationLetter").value;
+				var splitLetterText = letterText.split(" ");
+				for (var i = 0; i < splitLetterText.length; i++) {
+					letterWord = splitLetterText[i];
+					for (var maleCounter = 0; maleCounter < maleWords.length; maleCounter++) {
+						if (letterWord.toLowerCase().search(maleWords[maleCounter]) == 0) {
+							document.getElementById("foundMaleWords").innerHTML += '<p>' + letterWord + '</p>';
+						}
+					}
+					for (var femaleCounter = 0; femaleCounter < femaleWords.length; femaleCounter++) {
+						if (letterWord.toLowerCase().search(femaleWords[femaleCounter]) == 0) {
+							document.getElementById("foundFemaleWords").innerHTML += '<p>' + letterWord + '</p>';
+						}
+					}
+				}
+			}
+			
+			function example() {
+				document.getElementById("recommendationLetter").value = "Melinda was one of the first users of my now widely-used and successful software, MetNetMaker. Her early bug reports and insightful suggestions were invaluable to making the product what it is today. I have not since worked with anyone so at ease communicating with those in other scientific fields."
+				textChanged();
+			}
+		</script>
+	</head>
+	<body>
+		<div id="main">
+			
+			<h1>Gender-bias calculator</h1>
+					
+			<p>This calculator is derived from <a href="http://tomforth.co.uk/genderbias/">the version made by Thomas Forth</a> which was, in turn, inspired by this <a href="http://awisblog.wordpress.com/2013/04/23/gendered-wording/">AWIS blog</a> post on gender biases in recommendation letters. The blog post and  <a href="http://www.ncbi.nlm.nih.gov/pmc/articles/PMC2572075/">the scientific paper</a> it is based on also explain why this gender bias is important. Thanks to <a href="https://twitter.com/kejames/">Dr. Karen James</a> for the inspiration.</p>
+			<button class="button" onclick="example()">Try an example!</button>
+
+			<div class="body">
+				<form action="submithandler.php" method="POST">
+					<textarea onkeyup="textChanged()" placeholder="Write or paste your recommendation letter here. Words that are more often associated with women will be added to the female list. Words that are more often associated with men will be added to the male list." id="recommendationLetter" style="width:100%; min-height:100px"></textarea>
+				</form>
+	
+				<table align="center" >
+					<tr>
+						<td style="padding: 0px 10px 0px 10px; border-right-style:solid" class="bodyTitle">
+						Female-associated words
+						</td>
+						<td style="padding: 0px 10px 0px 10px" class="bodyTitle">
+						Male-associated words
+						</td>
+					</tr>
+					<tr>
+						<td class="words" id="foundFemaleWords" >		
+						</td>
+						<td class="words" id="foundMaleWords">		
+						</td>
+					</tr>	
+				</table>
+			</div>
+
+			<button class="button" onclick="textChanged()">Force recalculate!</button>
+			<p><strong>Problems or suggestions?</strong> <a href="https://github.com/slowe/genderbias/issues/new?title=Hello&amp;labels=question">Add an issue on Github</a>.</p>
+				
+		</div>
+	</body>
+</html>
