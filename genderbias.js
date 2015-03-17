@@ -52,7 +52,7 @@ function parsePage(data){
 		out += data[i]+'\n';
 	}
 	// Replace HTML
-	out = out.replace(/\<[^\>]+\>/,'');
+	out = out.replace(/\<[^\>]+\>/g,'');
 	return out;
 }
 
@@ -84,7 +84,6 @@ function loadFILE(file,fn,attrs){
 		xhr.addEventListener("abort", error, false);
 	}
 	xhr.onreadystatechange = function(){
-		console.log(xhr.readyState)
 		if(xhr.readyState==4){
 			if(typeof fn==="function"){
 				fn.call((attrs.context ? attrs.context : this),xhr.responseText,attrs);
