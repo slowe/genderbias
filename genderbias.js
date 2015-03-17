@@ -28,7 +28,7 @@ function example() {
 	var v = "Melinda was one of the first users of my now widely-used and successful software, MetNetMaker. Her early bug reports and insightful suggestions were invaluable to making the product what it is today. I have not since worked with anyone so at ease communicating with those in other scientific fields.";
 	if(examples.length > 0){
 		var i = Math.floor(Math.random()*examples.length);
-		v = parseMarkdown(examples[i]);
+		v = parsePage(examples[i]);
 	}
 	document.getElementById("recommendationLetter").value = v;
 	textChanged();
