@@ -57,8 +57,10 @@ function parsePage(data){
 }
 
 function getExamples(data){
+	// Split into an array by new line characters
 	if(typeof data==="string") data = data.split(/[\n\r]/);
 	var m,md,html;
+	// Define the callback function for success
 	var success = function(data,a){ if(data) examples.push(data); };
 
 	for(var i = 0; i < data.length ; i++){
@@ -66,11 +68,13 @@ function getExamples(data){
 		if(m){
 			md = m[1];
 			html = md.replace(/\.md/,".html");
+			// We will try to load an HTML version first because gh-pages converts the Markdown files to HTML
 			loadFILE('examples/'+html,success,{error:function(){ loadFILE('examples/'+md,success); }});
 		}
 	}
 }
-//loadFILE('examples/README.md',getExamples);
+// Load the examples
+loadFILE('examples/README.md',getExamples);
 
 // Function to load a file (same domain)
 function loadFILE(file,fn,attrs){
