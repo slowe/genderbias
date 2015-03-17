@@ -56,11 +56,14 @@ function parseMarkdown(data){
 
 function getExamples(data){
 	if(typeof data==="string") data = data.split(/[\n\r]/);
-	var m;
+	var m,alt;
+	var success = function(data,a){ if(data) examples.push(data); };
+
 	for(var i = 0; i < data.length ; i++){
 		m = data[i].match(/\* \[[^\]]+\]\(([^\)]+)\)/);
 		if(m){
-			loadFILE('examples/'+m[1],function(data,a){ if(data) examples.push(data); });
+			alt = m[1].replace(/\.md/,".html");
+			loadFILE('examples/'+m[1],success,{error:function(){ console.log('trying '+alt);loadFILE('examples/'+alt,success); }});
 		}
 	}
 }
