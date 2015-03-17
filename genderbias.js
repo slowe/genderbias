@@ -9,24 +9,31 @@ function textChanged() {
 	var letterText = document.getElementById("recommendationLetter").value;
 	var splitLetterText = letterText.split(" ");
 	var score = {'male':0,'female':0};
+	var words = {'male':{},'female':{}};
+	var html = {'male':'','female':''};
 	for (var i = 0; i < splitLetterText.length; i++) {
 		letterWord = splitLetterText[i];
 		for (var maleCounter = 0; maleCounter < maleWords.length; maleCounter++) {
 			if(letterWord.toLowerCase().search(maleWords[maleCounter]) == 0) {
-				document.getElementById("foundMaleWords").innerHTML += '<p>' + letterWord + '</p>';
+				if(!words.male[letterWord]) words.male[letterWord] = 0;
+				words.male[letterWord]++;
 				score.male++;
 			}
 		}
 		for (var femaleCounter = 0; femaleCounter < femaleWords.length; femaleCounter++) {
 			if(letterWord.toLowerCase().search(femaleWords[femaleCounter]) == 0) {
-				document.getElementById("foundFemaleWords").innerHTML += '<p>' + letterWord + '</p>';
+				if(!words.female[letterWord]) words.female[letterWord] = 0;
+				words.female[letterWord]++;
 				score.female++;
 			}
 		}
 	}
-	function scoreIt(a,b){
-		return (100*(a-b)/(a+b)).toFixed()
-	}
+	for(word in words.female) html.female += '<p>'+word+(words.female[word] > 1 ? ' &times;'+words.female[word] : '')+'</p>';
+	document.getElementById("foundFemaleWords").innerHTML = html.female;
+	for(word in words.male) html.male += '<p>'+word+(words.male[word] > 1 ? ' &times;'+words.male[word] : '')+'</p>';
+	document.getElementById("foundMaleWords").innerHTML = html.male;
+
+	function scoreIt(a,b){ return (100*(a-b)/(a+b)).toFixed(); }
 	var html = "";
 	if(score.male > score.female) html = "Male-biased ("+scoreIt(score.male,score.female)+"%)";
 	if(score.male < score.female) html = "Female-biased ("+scoreIt(score.female,score.male)+"%)";
