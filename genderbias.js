@@ -13,6 +13,7 @@ function textChanged() {
 	var html = {'male':'','female':''};
 	for (var i = 0; i < splitLetterText.length; i++) {
 		letterWord = splitLetterText[i];
+		letterWord = letterWord.replace(/\.$/g,'');
 		for (var maleCounter = 0; maleCounter < maleWords.length; maleCounter++) {
 			if(letterWord.toLowerCase().search(maleWords[maleCounter]) == 0) {
 				if(!words.male[letterWord]) words.male[letterWord] = 0;
