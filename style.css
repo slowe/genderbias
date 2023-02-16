@@ -15,10 +15,10 @@ body {
 }
 
 table { text-align: center; margin: auto;}
-td {
+td,th {
 	padding: 0px 10px 0px 10px;
 }
-td:first-child {
+td:first-child,th:first-child {
 	border-right-style:solid;
 }
 a.button { text-decoration: none; color: inherit; }
