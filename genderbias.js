@@ -116,10 +116,8 @@ function getExamples(data){
 		m = data[i].match(/\* \[[^\]]+\]\(([^\)]+)\)/);
 		if(m){
 			md = m[1];
-			//html = md.replace(/\.md/,".html");
-			path = 'examples/'+md;
 			// We will try to load an HTML version first because gh-pages converts the Markdown files to HTML
-			loadFILE(path,success,{});
+			loadFILE('examples/'+md.replace(/\.md/,".html"),success,{alternate:'examples/'+md});
 		}
 	}
 }
@@ -138,5 +136,6 @@ function loadFILE(file,fn,attrs){
 		if(typeof fn==="function") fn.call((attrs.context ? attrs.context : this),txt);
 	}).catch(error => {
 		console.error('Unable to load file from '+file);
+		if(attrs.alternate && attrs.alternate!=file) loadFILE(attrs.alternate,fn,attrs);
 	});
 }
