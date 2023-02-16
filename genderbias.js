@@ -116,10 +116,10 @@ function getExamples(data){
 		m = data[i].match(/\* \[[^\]]+\]\(([^\)]+)\)/);
 		if(m){
 			md = m[1];
-			html = md.replace(/\.md/,".html");
-			path = 'examples/'+html;
+			//html = md.replace(/\.md/,".html");
+			path = 'examples/'+md;
 			// We will try to load an HTML version first because gh-pages converts the Markdown files to HTML
-			loadFILE('examples/'+html,success,{error:function(){ loadFILE('examples/'+md,success); }});
+			loadFILE(path,success,{});
 		}
 	}
 }
