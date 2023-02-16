@@ -108,7 +108,7 @@ function parsePage(data){
 function getExamples(data){
 	// Split into an array by new line characters
 	if(typeof data==="string") data = data.split(/[\n\r]/);
-	var m,md,html;
+	var m,md,html,path;
 	// Define the callback function for success
 	var success = function(data,a){ if(data) examples.push(data); };
 
@@ -117,11 +117,13 @@ function getExamples(data){
 		if(m){
 			md = m[1];
 			html = md.replace(/\.md/,".html");
+			path = 'examples/'+html;
 			// We will try to load an HTML version first because gh-pages converts the Markdown files to HTML
 			loadFILE('examples/'+html,success,{error:function(){ loadFILE('examples/'+md,success); }});
 		}
 	}
 }
+
 // Load the examples
 loadFILE('examples/README.md',getExamples);
 
@@ -130,23 +132,11 @@ function loadFILE(file,fn,attrs){
 	if(!attrs) attrs = {};
 	attrs['_file'] = file;
 	var error = "";
-	var xhr = new XMLHttpRequest();
-	if(attrs.error && typeof attrs.error==="function") error = function(e){ attrs.error.call((attrs.context ? attrs.context : this),e,attrs) }
-	if(error){
-		xhr.addEventListener("error", error, false);
-		xhr.addEventListener("abort", error, false);
-	}
-	xhr.onreadystatechange = function(){
-		if(xhr.readyState==4){
-			if(typeof fn==="function"){
-				fn.call((attrs.context ? attrs.context : this),xhr.responseText,attrs);
-			}
-		}
-	}
-	xhr.open("GET", file, true);
-	try {
-		xhr.send();
-	} catch(e) {
-		if(error) attrs.error.call((attrs.context ? attrs.context : this),e,attrs);
-	}
+	fetch(file,{})
+	.then(response => { return response.text(); })
+	.then(txt => {
+		if(typeof fn==="function") fn.call((attrs.context ? attrs.context : this),txt);
+	}).catch(error => {
+		console.error('Unable to load file from '+file);
+	});
 }
