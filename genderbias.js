@@ -117,7 +117,7 @@ function getExamples(data){
 		if(m){
 			md = m[1];
 			// We will try to load an HTML version first because gh-pages converts the Markdown files to HTML
-			loadFILE('examples/'+md.replace(/\.md/,".html"),success,{alternate:'examples/'+md});
+			loadFILE('examples/'+md,success,{alternate:'examples/'+md});
 		}
 	}
 }
