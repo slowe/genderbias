@@ -1,0 +1,9 @@
+{
+	"_about": {
+		"source": "tamugreenqueen3210",
+		"description": "Medical school specific dictionary",
+		"creation": "2023-02-12"
+	},
+	"female": ["hardworking", "conscientious", "depend\\w*", "meticulous", "delight\\w*", "bubbly", "happy", "cheer\\w*", "receptive", "smile", "thorough", "diligen\\w*", "dedicate", "careful", "reliab\\w*", "effort\\w*", "assiduous", "trust\\w*", "responsib\\w*", "methodical", "industrious", "busy", "work\\w*", "persist\\w*", "organiz\\w*", "disciplined", "citizen", "rapport", "care", "support", "time", "enthusiastic", "sweet", "joyful", "kind", "congenial", "lovely"],
+	"male": ["excellen\\w*", "superb", "outstanding", "unique", "exceptional", "unparalleled", "\\w{2,}est(\\W|$)", "stellar", "best", "most", "wonderful", "terrific\\w*", "fabulous", "magnificent", "remarkable", "extraordinar\\w*", "amazing", "supreme\\w*", "unmatched", "talent\\w*", "leader\\w*", "intell\\w*", "smart\\w*", "skill\\w*", "ability", "achieve", "genius", "brilliant\\w*", "bright\\w*", "brain\\w*", "aptitude", "gift\\w*", "capacity", "propensity", "innate", "flair", "knack", "clever\\w*", "expert\\w*", "proficient\\w*", "capable", "adept\\w*", "competent", "natural\\w*", "inherent\\w*", "instinct\\w*", "adroit\\w*", "creative\\w*", "insight\\w*", "analytical", "study", "experiment\\w*", "scholarship", "result\\w*", "finding\\w*", "publication\\w*", "publish\\w*", "vita\\w*", "manuscript\\w*", "project\\w*", "theor\\w*", "discover\\w*", "contribution\\w*"]
+}

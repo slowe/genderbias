@@ -16,6 +16,11 @@
 
 			<div class="body">
 				<form action="submithandler.php" method="POST">
+					<label for="dictionary">Dictionary:</label>
+					<select id="dictionary">
+						<option value="dictionaries/standard.json">Default list of gendered words</option>
+						<option value="dictionaries/medical.json">Medical-school-specific gendered words</option>
+					</select>
 					<textarea onkeyup="textChanged()" placeholder="Write or paste your recommendation letter here. Words that are more often associated with women will be added to the female list. Words that are more often associated with men will be added to the male list." id="recommendationLetter" style="width:100%; min-height:100px"></textarea>
 				</form>
 	
@@ -33,7 +38,7 @@
 
 			<button class="button" onclick="textChanged()">Force recalculate!</button>
 
-			<p><strong>Problems or suggestions?</strong> <a href="https://github.com/slowe/genderbias/issues/new?title=Suggestion&amp;labels=question">Add an issue on Github</a>, <a href="https://github.com/slowe/genderbias/issues/1">suggest more examples</a>, <a href="https://github.com/slowe/genderbias">improve the code</a>.</p>
+			<p><strong>Problems or suggestions?</strong> <a href="https://github.com/slowe/genderbias/issues/new?title=Suggestion&amp;labels=question">Add an issue on Github</a>, <a href="https://github.com/slowe/genderbias/issues/1">suggest more examples</a>, <a href="https://github.com/slowe/genderbias/tree/main/dictionaries/">add an alternate dictionary</a>, or <a href="https://github.com/slowe/genderbias">improve the code</a>.</p>
 				
 		</div>
 	</body>

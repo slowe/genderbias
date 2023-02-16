@@ -79,3 +79,4 @@ a.button { text-decoration: none; color: inherit; }
 	-moz-box-shadow: 0px 1px 3px #3366DD;
 	-webkit-box-shadow: 0px 1px 3px #3366DD;
 }
+input,select { font-size: 1em; line-height: 2em; height: 2em; }
